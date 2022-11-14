@@ -8,6 +8,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "party_menu.h"
+#include "random.h"
 #include "recorded_battle.h"
 #include "task.h"
 #include "util.h"
@@ -25,6 +26,7 @@ static void InitSinglePlayerBtlControllers(void);
 static void SetBattlePartyIds(void);
 static void Task_HandleSendLinkBuffersData(u8 taskId);
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId);
+static void RandomizeMon(struct Pokemon *mon);
 
 void HandleLinkBattleSetup(void)
 {
@@ -65,6 +67,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
         CreateMon(&gEnemyParty[0], SPECIES_ZIGZAGOON, 2, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
         i = 0;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
+        RandomizeMon(&gEnemyParty[0]);
     }
 
     // Below are never read
@@ -577,9 +580,48 @@ static void InitLinkBtlControllers(void)
     }
 }
 
+static void RandomizeMon(struct Pokemon *mon) 
+{
+    u32 iv, value, exp;
+    u16 species;
+    u8 speciesName[POKEMON_NAME_LENGTH + 1];
+
+    value = Random();
+    iv = value & MAX_IV_MASK;
+    SetBoxMonData(&mon->box, MON_DATA_HP_IV, &iv);
+    iv = (value & (MAX_IV_MASK << 5)) >> 5;
+    SetBoxMonData(&mon->box, MON_DATA_ATK_IV, &iv);
+    iv = (value & (MAX_IV_MASK << 10)) >> 10;
+    SetBoxMonData(&mon->box, MON_DATA_DEF_IV, &iv);
+
+    value = Random();
+    iv = value & MAX_IV_MASK;
+    SetBoxMonData(&mon->box, MON_DATA_SPEED_IV, &iv);
+    iv = (value & (MAX_IV_MASK << 5)) >> 5;
+    SetBoxMonData(&mon->box, MON_DATA_SPATK_IV, &iv);
+    iv = (value & (MAX_IV_MASK << 10)) >> 10;
+    SetBoxMonData(&mon->box, MON_DATA_SPDEF_IV, &iv);    
+
+    do 
+    {
+        species = Random() % (NUM_SPECIES - 1);
+    } while(species > 251 && species < 277);
+    SetMonData(mon, MON_DATA_SPECIES, &species);
+
+    GetSpeciesName(speciesName, species);
+    SetBoxMonData(&mon->box, MON_DATA_NICKNAME, speciesName);
+
+    exp = Random() % gExperienceTables[gBaseStats[species].growthRate][100];
+    SetMonData(mon, MON_DATA_EXP, &exp);
+
+    GiveMonInitialMoveset(mon);
+    
+    CalculateMonStats(mon);
+}
+
 static void SetBattlePartyIds(void)
 {
-    s32 i, j;
+    s32 i, j;    
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
@@ -595,7 +637,8 @@ static void SetBattlePartyIds(void)
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG))
-                        {
+                        {                           
+                            RandomizeMon(&gPlayerParty[j]);
                             gBattlerPartyIndexes[i] = j;
                             break;
                         }
@@ -607,6 +650,7 @@ static void SetBattlePartyIds(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && !GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG))
                         {
+                            RandomizeMon(&gEnemyParty[j]);
                             gBattlerPartyIndexes[i] = j;
                             break;
                         }
@@ -622,6 +666,7 @@ static void SetBattlePartyIds(void)
                          && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG)
                          && gBattlerPartyIndexes[i - 2] != j)
                         {
+                            RandomizeMon(&gPlayerParty[j]);
                             gBattlerPartyIndexes[i] = j;
                             break;
                         }
@@ -634,6 +679,7 @@ static void SetBattlePartyIds(void)
                          && !GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG)
                          && gBattlerPartyIndexes[i - 2] != j)
                         {
+                            RandomizeMon(&gEnemyParty[j]);
                             gBattlerPartyIndexes[i] = j;
                             break;
                         }
