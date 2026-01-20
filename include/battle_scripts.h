@@ -223,4 +223,14 @@ extern const u8 BattleScript_ActionWatchesCarefully[];
 extern const u8 BattleScript_ActionGetNear[];
 extern const u8 BattleScript_ActionThrowPokeblock[];
 
+// Gen 4 abilities
+extern const u8 BattleScript_SnowWarningActivates[];
+//extern const u8 BattleScript_IronFistActivates[];
+//extern const u8 BattleScript_AdaptabilityActivates[];
+//extern const u8 BattleScript_IceBodyActivates[];
+//extern const u8 BattleScript_DownloadActivates[];
+//extern const u8 BattleScript_SniperActivates[];
+//extern const u8 BattleScript_PoisonTouchActivates[];
+//extern const u8 BattleScript_SolidRockReducesDamage[];
+
 #endif // GUARD_BATTLE_SCRIPTS_H
