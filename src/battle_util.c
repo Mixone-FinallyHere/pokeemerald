@@ -2768,6 +2768,25 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+        case ABILITYEFFECT_ON_CONTACT_ATTACKER:
+            switch (gLastUsedAbility)
+            {
+            case ABILITY_POISON_TOUCH:
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                 && gBattleMons[gBattlerAttacker].hp != 0
+                 && TARGET_TURN_DAMAGED
+                 && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+                 && (Random() % 3) == 0)
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_POISON;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
+                    gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
+                    effect++;
+                }
+                break;
+            
+            }
         case ABILITYEFFECT_ON_DAMAGE: // Contact abilities and Color Change
             switch (gLastUsedAbility)
             {
@@ -2839,7 +2858,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
                     effect++;
                 }
-                break;
+                break;            
             case ABILITY_STATIC:
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && gBattleMons[gBattlerAttacker].hp != 0

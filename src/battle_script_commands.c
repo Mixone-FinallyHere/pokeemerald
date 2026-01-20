@@ -4282,6 +4282,11 @@ static void Cmd_moveend(void)
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
+        case MOVEEND_CONTACT_ABILITIES: // abilities that activate on contact (Static, Flame Body, etc.)
+            if (AbilityBattleEffects(ABILITYEFFECT_ON_CONTACT_ATTACKER, gBattlerAttacker, 0, 0, 0))
+                effect = TRUE;
+            gBattleScripting.moveendState++;
+            break;
         case MOVEEND_IMMUNITY_ABILITIES: // status immunities
             if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, 0, 0, 0, 0))
                 effect = TRUE; // it loops through all battlers, so we increment after its done with all battlers
