@@ -227,7 +227,7 @@ extern const u8 BattleScript_ActionThrowPokeblock[];
 extern const u8 BattleScript_SnowWarningActivates[];
 //extern const u8 BattleScript_IronFistActivates[];
 //extern const u8 BattleScript_AdaptabilityActivates[];
-//extern const u8 BattleScript_IceBodyActivates[];
+extern const u8 BattleScript_IceBodyActivates[];
 //extern const u8 BattleScript_DownloadActivates[];
 //extern const u8 BattleScript_SniperActivates[];
 //extern const u8 BattleScript_PoisonTouchActivates[];

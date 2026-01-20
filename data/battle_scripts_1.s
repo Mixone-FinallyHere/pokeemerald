@@ -4568,3 +4568,11 @@ BattleScript_SnowWarningActivates::
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
 	call BattleScript_WeatherFormChanges
 	end3
+
+BattleScript_IceBodyActivates::
+	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	end3
