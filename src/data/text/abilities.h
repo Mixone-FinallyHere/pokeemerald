@@ -76,6 +76,14 @@ static const u8 sPurePowerDescription[] = _("Raises ATTACK.");
 static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
 static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
+static const u8 sIronFistDescription[] = _("Boosts punch-based moves.");
+static const u8 sAdaptabilityDescription[] = _("Boosts same-type moves.");
+static const u8 sIceBodyDescription[] = _("Heals HP in hail.");
+static const u8 sSnowWarningDescription[] = _("Summons hail in battle.");
+static const u8 sDownloadDescription[] = _("Adjusts power based on foe.");
+static const u8 sSniperDescription[] = _("Boosts critical-hit damage.");
+static const u8 sPoisonTouchDescription[] = _("May poison on contact.");
+static const u8 sSolidRockDescription[] = _("Reduces super effective damage.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -157,6 +165,14 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SHELL_ARMOR] = _("SHELL ARMOR"),
     [ABILITY_CACOPHONY] = _("CACOPHONY"),
     [ABILITY_AIR_LOCK] = _("AIR LOCK"),
+    [ABILITY_IRON_FIST] = _("IRON FIST"),
+    [ABILITY_ADAPTABILITY] = _("ADAPTABILITY"),
+    [ABILITY_ICE_BODY] = _("ICE BODY"),
+    [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
+    [ABILITY_DOWNLOAD] = _("DOWNLOAD"),
+    [ABILITY_SNIPER] = _("SNIPER"),
+    [ABILITY_POISON_TOUCH] = _("POISON TOUCH"),
+    [ABILITY_SOLID_ROCK] = _("SOLID ROCK"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -239,4 +255,12 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SHELL_ARMOR] = sShellArmorDescription,
     [ABILITY_CACOPHONY] = sCacophonyDescription,
     [ABILITY_AIR_LOCK] = sAirLockDescription,
+    [ABILITY_IRON_FIST] = sIronFistDescription,
+    [ABILITY_ADAPTABILITY] = sAdaptabilityDescription,
+    [ABILITY_ICE_BODY] = sIceBodyDescription,
+    [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
+    [ABILITY_DOWNLOAD] = sDownloadDescription,
+    [ABILITY_SNIPER] = sSniperDescription,
+    [ABILITY_POISON_TOUCH] = sPoisonTouchDescription,
+    [ABILITY_SOLID_ROCK] = sSolidRockDescription,
 };
