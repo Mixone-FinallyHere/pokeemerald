@@ -433,6 +433,10 @@ static const u8 sText_Evasiveness[] = _("evasiveness");
 
 // Gen 4 abilities
 static const u8 sText_PkmnsXSummonedHail[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nsummoned hail!");
+static const u8 sText_PkmnsXRaisedAtk[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its ATTACK!");
+static const u8 sText_PkmnsXRaisedDef[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its DEFENSE!");
+static const u8 sText_PkmnsXRaisedSpAtk[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SP. ATK!");
+static const u8 sText_PkmnsXRaisedSpDef[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SP. DEF!");
 
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -888,7 +892,12 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
+    // Gen 4 abilities + delta stuff
     [STRINGID_PKMNSXSUMMONEDHAIL - BATTLESTRINGS_TABLE_START] = sText_PkmnsXSummonedHail,
+    [STRINGID_PKMNSXRAISEDATK - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedAtk,
+    [STRINGID_PKMNSXRAISEDDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedDef,
+    [STRINGID_PKMNSXRAISEDSPDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedSpDef,
+    [STRINGID_PKMNSXRAISEDSPATK - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedSpAtk,
 };
 
 const u16 gMissStringIds[] =

@@ -2572,6 +2572,52 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gSpecialStatuses[battler].intimidatedMon = 1;
                 }
                 break;
+            case ABILITY_DOWNLOAD:
+                if (!gSpecialStatuses[battler].switchInAbilityDone)
+                {
+                    u32 opposingBattler;
+                    u32 opposingDef = 0, opposingSpDef = 0;
+
+                    opposingBattler = BATTLE_OPPOSITE(battler);
+                    for (i = 0; i < 2; opposingBattler ^= BIT_FLANK, i++)
+                    {
+                        if (IsBattlerAlive(opposingBattler))
+                        {
+                            opposingDef += gBattleMons[opposingBattler].defense
+                                        * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][0]
+                                        / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][1];
+                            opposingSpDef += gBattleMons[opposingBattler].spDefense
+                                        * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][0]
+                                        / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][1];
+                        }
+                    }
+                    if (opposingDef < opposingSpDef)
+                    {
+                        if (gBattleMons[battler].statStages[STAT_ATK] < MAX_STAT_STAGE)
+                        {
+                            gBattleMons[battler].statStages[STAT_ATK]++;
+                            gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
+                            gBattleScripting.animArg2 = 0;
+                            BattleScriptPushCursorAndCallback(BattleScript_DownloadAtkActivates);
+                            gBattleScripting.battler = battler;
+                            gSpecialStatuses[battler].switchInAbilityDone = 1;
+                            effect++;
+                        }
+                    }
+                    else {
+                        if (gBattleMons[battler].statStages[STAT_SPATK] < MAX_STAT_STAGE)
+                        {
+                            gBattleMons[battler].statStages[STAT_SPATK]++;
+                            gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_SPATK;
+                            gBattleScripting.animArg2 = 0;
+                            BattleScriptPushCursorAndCallback(BattleScript_DownloadSpAtkActivates);
+                            gBattleScripting.battler = battler;
+                            gSpecialStatuses[battler].switchInAbilityDone = 1;
+                            effect++;                        
+                        }
+                    }                    
+                }
+                break;
             case ABILITY_FORECAST:
                 effect = CastformDataTypeChange(battler);
                 if (effect != 0)

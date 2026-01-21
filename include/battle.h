@@ -142,6 +142,8 @@ struct SpecialStatus
     s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
+    u8 switchInAbilityDone:1;
+    u8 padding:7;
 };
 
 struct SideTimer
@@ -726,5 +728,17 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
+
+static inline bool32 IsBattlerAlive(u32 battler)
+{
+    if (gBattleMons[battler].hp == 0)
+        return FALSE;
+    else if (battler >= gBattlersCount)
+        return FALSE;
+    else if (gAbsentBattlerFlags & (1u << battler))
+        return FALSE;
+    else
+        return TRUE;
+}
 
 #endif // GUARD_BATTLE_H

@@ -4576,3 +4576,15 @@ BattleScript_IceBodyActivates::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	end3
+
+BattleScript_DownloadAtkActivates::
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNSXRAISEDATK
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_DownloadSpAtkActivates::
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_PKMNSXRAISEDSPATK
+	waitmessage B_WAIT_TIME_LONG
+	end3
