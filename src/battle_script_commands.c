@@ -1280,7 +1280,13 @@ static void Cmd_critcalc(void)
      && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
      && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
      && !(Random() % sCriticalHitChance[critChance]))
+     {
         gCritMultiplier = 2;
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_SNIPER)
+        {
+            gCritMultiplier = 3;
+        }
+     }        
     else
         gCritMultiplier = 1;
 
