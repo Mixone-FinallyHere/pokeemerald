@@ -3103,6 +3103,26 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     (var) /= (gStatStageRatios)[(mon)->statStages[(statIndex)]][1];                 \
 }
 
+bool32 IsPunchingMove(u32 moveId)
+{
+    switch (moveId)
+    {
+    case MOVE_MACH_PUNCH:
+    case MOVE_DYNAMIC_PUNCH:
+    case MOVE_FIRE_PUNCH:
+    case MOVE_ICE_PUNCH:
+    case MOVE_THUNDER_PUNCH:
+    case MOVE_MEGA_PUNCH:
+    case MOVE_COMET_PUNCH:
+    case MOVE_FOCUS_PUNCH:
+    case MOVE_SHADOW_PUNCH:
+    case MOVE_DIZZY_PUNCH:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -3204,6 +3224,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
+    if (attacker->ability == ABILITY_IRON_FIST && IsPunchingMove(move))
+        attack = (120 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
         spAttack = (150 * spAttack) / 100;
     if (attacker->ability == ABILITY_MINUS && ABILITY_ON_FIELD2(ABILITY_PLUS))
