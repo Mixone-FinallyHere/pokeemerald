@@ -357,7 +357,44 @@
 #define MOVE_DOOM_DESIRE 353
 #define MOVE_PSYCHO_BOOST 354
 
-#define MOVES_COUNT 355
+// Gen 4 moves
+#define MOVE_IRON_HEAD          355
+#define MOVE_FLASH_CANNON       356
+#define MOVE_AVALANCHE          357
+#define MOVE_EARTH_POWER        358
+#define MOVE_POISON_JAB         359
+#define MOVE_AQUA_JET           360
+#define MOVE_BULLET_PUNCH       361
+#define MOVE_SHADOW_SNEAK       362
+#define MOVE_ICE_SHARD          363
+#define MOVE_DARK_PULSE         364
+#define MOVE_ENERGY_BALL        365
+#define MOVE_FIRE_FANG          366
+#define MOVE_THUNDER_FANG       367
+#define MOVE_ICE_FANG           368
+#define MOVE_POWER_GEM          369
+#define MOVE_BRAVE_BIRD         370
+#define MOVE_CHARGE_BEAM        371
+#define MOVE_NIGHT_SLASH        372
+#define MOVE_PSYCHO_CUT         373
+#define MOVE_X_SCISSOR          374
+#define MOVE_ZEN_HEADBUTT       375
+#define MOVE_SHADOW_CLAW        376
+#define MOVE_SEED_BOMB          377
+#define MOVE_NASTY_PLOT         378
+#define MOVE_PINCER_SNAP           379
+#define MOVE_BUG_BUZZ           380
+#define MOVE_DISCHARGE          381
+#define MOVE_FORCE_PALM         382
+#define MOVE_AURA_SPHERE        383
+#define MOVE_OMINOUS_WIND       384
+#define MOVE_MIRROR_SHOT        385
+#define MOVE_DRAGON_PULSE       386
+#define MOVE_AQUA_TAIL          387
+#define MOVE_COTTON_GUARD       388
+#define MOVE_FLAME_CHARGE       389
+
+#define MOVES_COUNT 390
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

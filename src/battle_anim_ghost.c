@@ -217,6 +217,28 @@ static const struct SpriteTemplate sMonMoveCircularSpriteTemplate =
     .callback = AnimMonMoveCircular,
 };
 
+const struct SpriteTemplate gFlashCannonBallMovementTemplate =
+{
+    .tileTag = ANIM_TAG_SHADOW_BALL,
+    .paletteTag = ANIM_TAG_SHADOW_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall
+};
+
+const struct SpriteTemplate gEnergyBallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SHADOW_BALL,
+    .paletteTag = ANIM_TAG_SHADOW_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall,
+};
+
 static void AnimConfuseRayBallBounce(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);

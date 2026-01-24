@@ -437,6 +437,8 @@ static const u8 sText_PkmnsXRaisedAtk[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {
 static const u8 sText_PkmnsXRaisedDef[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its DEFENSE!");
 static const u8 sText_PkmnsXRaisedSpAtk[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SP. ATK!");
 static const u8 sText_PkmnsXRaisedSpDef[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SP. DEF!");
+static const u8 sText_PkmnSqueezedByPincers[] = _("{B_ATK_NAME_WITH_PREFIX} squeezed\n{B_EFF_NAME_WITH_PREFIX} with its pincers!");
+static const u8 sText_drastically[] = _("drastically ");
 
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -898,6 +900,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNSXRAISEDDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedDef,
     [STRINGID_PKMNSXRAISEDSPDEF - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedSpDef,
     [STRINGID_PKMNSXRAISEDSPATK - BATTLESTRINGS_TABLE_START] = sText_PkmnsXRaisedSpAtk,
+    [STRINGID_PKMNSQUEEZEDBYPINCERS - BATTLESTRINGS_TABLE_START] = sText_PkmnSqueezedByPincers,
+    [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_drastically,
 };
 
 const u16 gMissStringIds[] =
@@ -1055,7 +1059,8 @@ const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
     STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_FIRE_SPIN
     STRINGID_PKMNCLAMPED,          // MOVE_CLAMP
     STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_WHIRLPOOL
-    STRINGID_PKMNTRAPPEDBYSANDTOMB // MOVE_SAND_TOMB
+    STRINGID_PKMNTRAPPEDBYSANDTOMB, // MOVE_SAND_TOMB
+    STRINGID_PKMNSQUEEZEDBYPINCERS // MOVE_PINCER_SNAP
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1274,6 +1279,7 @@ const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
     MOVE_CLAMP,
     MOVE_WHIRLPOOL,
     MOVE_SAND_TOMB,
+    MOVE_PINCER_SNAP,
     0xFFFF // Never read
 };
 
@@ -1570,7 +1576,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .bgColor = 14,
         .shadowColor = 11,
     },
-    [B_WIN_DUMMY] = {
+    [B_WIN_PSS_ICON] = {
         .fillValue = PIXEL_FILL(0xE),
         .fontId = FONT_NORMAL,
         .x = 0,
@@ -1810,7 +1816,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .bgColor = 14,
         .shadowColor = 11,
     },
-    [B_WIN_DUMMY] = {
+    [B_WIN_PSS_ICON] = {
         .fillValue = PIXEL_FILL(0xE),
         .fontId = FONT_NORMAL,
         .x = 0,

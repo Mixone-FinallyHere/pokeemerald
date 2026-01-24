@@ -232,6 +232,12 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCalmMind               @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
+	.4byte BattleScript_EffectSpAttackUpHit 		 @ EFFECT_SPATTACK_UP_HIT
+	.4byte BattleScript_EffectBurnAndFlinch			 @ EFFECT_BURN_OR_FLINCH_HIT
+	.4byte BattleScript_EffectParalizeAndFlinch	     @ EFFECT_PARALYZE_OR_FLINCH_HIT
+	.4byte BattleScript_EffectFreexeAndFlinch		 @ EFFECT_FREEZE_OR_FLINCH_HIT
+	.4byte BattleScript_EffectDefenseUp3			 @ EFFECT_DEFENSE_UP_3
+	.4byte BattleScript_EffectSpeedUpHit			 @ EFFECT_SPEED_UP_HIT
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -4588,3 +4594,65 @@ BattleScript_DownloadSpAtkActivates::
 	printstring STRINGID_PKMNSXRAISEDSPATK
 	waitmessage B_WAIT_TIME_LONG
 	end3
+
+BattleScript_EffectSpAttackUpHit::
+	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
+
+BattleScript_EffectBurnAndFlinch::
+	setmoveeffect MOVE_EFFECT_BURN_OR_FLINCH
+	goto BattleScript_EffectHit
+
+BattleScript_EffectParalizeAndFlinch::
+	setmoveeffect MOVE_EFFECT_PARALYZE_OR_FLINCH
+	goto BattleScript_EffectHit
+
+BattleScript_EffectFreexeAndFlinch::		
+	setmoveeffect MOVE_EFFECT_FREEZE_OR_FLINCH
+	goto BattleScript_EffectHit
+
+BattleScript_EffectDefenseUp3::
+	setstatchanger STAT_DEF, 3, FALSE
+	goto BattleScript_EffectStatUp
+
+BattleScript_EffectSpeedUpHit::
+    setstatchanger STAT_SPEED, 1, FALSE
+    goto BattleScript_EffectStatUpHit
+
+BattleScript_EffectStatUpHit::
+    attackcanceler
+BattleScript_StatUpHit_FromAccCheck::
+    accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+BattleScript_StatUpHit_FromAtkString::
+    attackstring
+    ppreduce
+BattleScript_StatUpHit_FromCritCalc::
+    critcalc
+    damagecalc
+    typecalc
+    adjustnormaldamage
+BattleScript_StatUpHit_FromAtkAnimation::
+    attackanimation
+    waitanimation
+    effectivenesssound
+    hitanimation BS_TARGET
+    waitstate
+    healthbarupdate BS_TARGET
+    datahpupdate BS_TARGET
+    critmessage
+    waitmessage B_WAIT_TIME_LONG
+    resultmessage
+    waitmessage B_WAIT_TIME_LONG
+    seteffectwithchance
+    tryfaintmon BS_TARGET
+    statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_StatUpHit_StatFailed
+    setgraphicalstatchangevalues
+    playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+    printfromtable gStatUpStringIds
+    waitmessage B_WAIT_TIME_LONG
+    goto BattleScript_StatUpHit_MoveEnd
+BattleScript_StatUpHit_StatFailed::
+    printfromtable gStatUpStringIds
+    waitmessage B_WAIT_TIME_LONG
+BattleScript_StatUpHit_MoveEnd::
+    goto BattleScript_MoveEnd

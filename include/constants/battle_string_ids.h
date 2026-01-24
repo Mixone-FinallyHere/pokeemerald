@@ -381,12 +381,13 @@
 
 // Gen 4 abilities
 #define STRINGID_PKMNSXSUMMONEDHAIL         381
-#define STRINGID_PKMNSXRAISEDATK              382
-#define STRINGID_PKMNSXRAISEDSPATK            383
-#define STRINGID_PKMNSXRAISEDDEF              384
-#define STRINGID_PKMNSXRAISEDSPDEF            385
-
-#define BATTLESTRINGS_COUNT                 386
+#define STRINGID_PKMNSXRAISEDATK            382
+#define STRINGID_PKMNSXRAISEDSPATK          383
+#define STRINGID_PKMNSXRAISEDDEF            384
+#define STRINGID_PKMNSXRAISEDSPDEF          385
+#define STRINGID_PKMNSQUEEZEDBYPINCERS      386
+#define	STRINGID_DRASTICALLY                  387
+#define BATTLESTRINGS_COUNT                 388
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -606,6 +607,6 @@
 #define B_MSG_REF_DRAW               7
 #define B_MSG_REF_COMMENCE_BATTLE    8
 
-#define NUM_TRAPPING_MOVES 6
+#define NUM_TRAPPING_MOVES 7
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

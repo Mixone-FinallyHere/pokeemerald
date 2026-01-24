@@ -1374,3 +1374,15 @@ void AnimTask_ShakeTargetInPattern(u8 taskId)
         DestroyAnimVisualTask(taskId);
     }
 }
+
+//flame charge
+const struct SpriteTemplate gFlameChargeEmberTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_FlamethrowerFlame,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceBigFlower
+};

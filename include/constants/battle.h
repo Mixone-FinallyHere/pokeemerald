@@ -302,9 +302,14 @@ enum BattlerId
 #define MOVE_EFFECT_NOTHING_39          57
 #define MOVE_EFFECT_NOTHING_3A          58
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
-#define NUM_MOVE_EFFECTS                60
+// Gen 4
+#define MOVE_EFFECT_BURN_OR_FLINCH      60
+#define MOVE_EFFECT_FREEZE_OR_FLINCH    61
+#define MOVE_EFFECT_PARALYZE_OR_FLINCH  62
+#define MOVE_EFFECT_SLEEP_OR_FLINCH     63
+#define NUM_MOVE_EFFECTS                64
 
-#define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
+#define MOVE_EFFECT_AFFECTS_USER        65
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
 
 // Battle environment defines for gBattleEnvironment.
@@ -350,7 +355,7 @@ enum BattlerId
 #define B_WIN_MOVE_NAME_3         5 // Bottom left
 #define B_WIN_MOVE_NAME_4         6 // Bottom right
 #define B_WIN_PP                  7
-#define B_WIN_DUMMY               8
+#define B_WIN_PSS_ICON               8
 #define B_WIN_PP_REMAINING        9
 #define B_WIN_MOVE_TYPE          10
 #define B_WIN_SWITCH_PROMPT      11 // "Switch which?"

@@ -53,6 +53,9 @@ static void CreateWaterSpoutRainDroplet(struct Task *, u8);
 static void AnimTask_WaterSport_Step(u8);
 static void CreateWaterSportDroplet(struct Task *);
 static void CreateWaterPulseRingBubbles(struct Sprite *, int, int);
+static void AnimAquaTail(struct Sprite *sprite);
+static void AnimKnockOffAquaTail(struct Sprite *sprite);
+static void AnimKnockOffAquaTailStep(struct Sprite *sprite);
 
 static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unused/water_gfx.4bpp");
 static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unused/water.bin");
@@ -228,7 +231,7 @@ static const union AnimCmd sAnim_FlamethrowerFlame[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_FlamethrowerFlame[] =
+const union AnimCmd *const gAnims_FlamethrowerFlame[] =
 {
     sAnim_FlamethrowerFlame,
 };
@@ -238,7 +241,7 @@ const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FlamethrowerFlame,
+    .anims = gAnims_FlamethrowerFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimToTargetInSinWave,
@@ -1593,4 +1596,144 @@ static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yD
         else
             gSprites[spriteId].data[2] = randomSomethingX;
     }
+}
+
+const union AffineAnimCmd gAquaTailHitAffineAnimCmd_1[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gAquaTailHitAffineAnimCmd_2[] =
+{
+    AFFINEANIMCMD_FRAME(0xD8, 0xD8, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gAquaTailHitAffineAnimCmd_3[] =
+{
+    AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gAquaTailHitAffineAnimCmd_4[] =
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gAquaTailHitAffineAnims[] =
+{
+    gAquaTailHitAffineAnimCmd_1,
+    gAquaTailHitAffineAnimCmd_2,
+    gAquaTailHitAffineAnimCmd_3,
+    gAquaTailHitAffineAnimCmd_4,
+};
+
+const union AnimCmd gKnockOffAquaTailAnimCmd[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gKnockOffAquaTailAnim[] =
+{
+    gKnockOffAquaTailAnimCmd,
+};
+
+const union AffineAnimCmd gKnockOffAquaTailAffineanimCmd_1[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gKnockOffAquaTailAffineanimCmd_2[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 4, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gKnockOffAquaTailAffineAnim[] =
+{
+    gKnockOffAquaTailAffineanimCmd_1,
+    gKnockOffAquaTailAffineanimCmd_2,
+};
+
+const struct SpriteTemplate gAquaTailKnockOffSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SLAM_HIT_2,
+    .paletteTag = ANIM_TAG_WATER_IMPACT,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+    .anims = gKnockOffAquaTailAnim,
+    .images = NULL,
+    .affineAnims = gKnockOffAquaTailAffineAnim,
+    .callback = AnimKnockOffAquaTail,
+};
+
+const struct SpriteTemplate gAquaTailHitSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_WATER_IMPACT,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAquaTailHitAffineAnims,
+    .callback = AnimAquaTail,
+};
+
+// args[0] - initial sprite x
+// args[1] - initial sprite y
+// args[2] - attacker or target
+// args[3] - affine anim number
+static void AnimAquaTail(struct Sprite *sprite)
+{
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
+    if (gBattleAnimArgs[2] == 0)
+        InitSpritePosToAnimAttacker(sprite, TRUE);
+    else
+        InitSpritePosToAnimTarget(sprite, TRUE);
+
+    sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+// args[0] - initial x delta
+// args[1] - initial y delta
+static void AnimKnockOffAquaTail(struct Sprite *sprite)
+{
+    if (IsOnPlayerSide(gBattleAnimTarget))
+    {
+        sprite->x -= gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
+        sprite->data[0] = -11;
+        sprite->data[1] = 192;
+        StartSpriteAffineAnim(sprite, 1);
+    }
+    else
+    {
+        sprite->data[0] = 11;
+        sprite->data[1] = 192;
+        sprite->x += gBattleAnimArgs[0];
+        sprite->y += gBattleAnimArgs[1];
+    }
+
+    sprite->callback = AnimKnockOffAquaTailStep;
+}
+
+static void AnimKnockOffAquaTailStep(struct Sprite *sprite)
+{
+    sprite->data[1] += sprite->data[0];
+    sprite->data[1] &= 0xFF;
+    sprite->x2 = Cos(sprite->data[1], 20);
+    sprite->y2 = Sin(sprite->data[1], 20);
+    if (sprite->animEnded)
+        DestroyAnimSprite(sprite);
+
+    sprite->data[2]++;
 }

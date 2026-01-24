@@ -153,6 +153,7 @@ void DestroyAnimVisualTaskAndDisableBlend(u8 taskId);
 void DestroySpriteAndFreeResources_(struct Sprite *sprite);
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 u8 GetBattlerSide(u8 battler);
+bool8 IsOnPlayerSide(u8 battler);
 u8 GetBattlerPosition(u8 battler);
 u8 GetBattlerAtPosition(u8 position);
 void ConvertPosDataToTranslateLinearData(struct Sprite *sprite);
@@ -302,5 +303,11 @@ extern const union AffineAnimCmd *const gAffineAnims_Droplet[];
 extern const union AnimCmd *const gAnims_SmallBubblePair[];
 extern const union AnimCmd *const gAnims_WaterBubble[];
 extern const union AffineAnimCmd *const gAffineAnims_Bite[];
+
+extern const union AnimCmd *const gAnims_FlamethrowerFlame[];
+
+
+void AnimPetalDanceBigFlower(struct Sprite *sprite);
+
 
 #endif // GUARD_BATTLE_ANIM_H

@@ -36,7 +36,6 @@ static void AnimHyperBeamOrb(struct Sprite *);
 static void AnimHyperBeamOrb_Step(struct Sprite *);
 static void AnimSporeParticle(struct Sprite *);
 static void AnimSporeParticle_Step(struct Sprite *);
-static void AnimPetalDanceBigFlower(struct Sprite *);
 static void AnimPetalDanceBigFlower_Step(struct Sprite *);
 static void AnimPetalDanceSmallFlower(struct Sprite *);
 static void AnimPetalDanceSmallFlower_Step(struct Sprite *);
@@ -1628,6 +1627,18 @@ const struct SpriteTemplate gFalseSwipePositionedSliceSpriteTemplate =
     .callback = AnimFalseSwipePositionedSlice,
 };
 
+//cotton guard
+const struct SpriteTemplate gCottonGuardSporeTemplate =
+{
+    .tileTag = ANIM_TAG_SPORE,
+    .paletteTag = ANIM_TAG_SPORE,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gSporeParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
+    .callback = AnimPowerAbsorptionOrb
+};
+
 const union AnimCmd gEndureEnergyAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -2479,7 +2490,7 @@ void AnimTask_SporeDoubleBattle(u8 taskId)
 
 // Rotates a big flower around the attacking mon, and slowly floats
 // downward.
-static void AnimPetalDanceBigFlower(struct Sprite *sprite)
+void AnimPetalDanceBigFlower(struct Sprite *sprite)
 {
     CMD_ARGS(initialX, initialY, targetY, duration);
 

@@ -1417,6 +1417,147 @@ static const u8 sPsychoBoostDescription[] = _(
     "Allows a full-power attack,\n"
     "but sharply lowers SP. ATK.");
 
+static const u8 sIronHeadDescription[] = _(
+    "Slams the foe with a hard head.\n"
+    "May cause flinching.");
+
+static const u8 sFlashCannonDescription[] = _(
+    "Fires a flash of rainbow light.\n"
+    "May lower Sp. Def.");
+
+static const u8 sAvalancheDescription[] = _(
+    "Power doubles if hit first.\n"
+    "Ice-type physical attack.");
+
+static const u8 sEarthPowerDescription[] = _(
+    "Erupts the ground under foe.\n"
+    "May lower Sp. Def.");
+
+static const u8 sPoisonJabDescription[] = _(
+    "Stabs with a toxic fist.\n"
+    "May poison the target.");
+
+static const u8 sAquaJetDescription[] = _(
+    "Attacks at blinding speed.\n"
+    "Always strikes first.");
+
+static const u8 sBulletPunchDescription[] = _(
+    "A tough punch as fast as\n"
+    "a bullet. Strikes first.");
+
+static const u8 sShadowSneakDescription[] = _(
+    "Extends shadow to strike.\n"
+    "Always goes first.");
+
+static const u8 sIceShardDescription[] = _(
+    "Launches sharp icicles.\n"
+    "Always strikes first.");
+
+static const u8 sDarkPulseDescription[] = _(
+    "Horrible dark aura blast.\n"
+    "May cause flinching.");
+
+static const u8 sEnergyBallDescription[] = _(
+    "Draws power from nature.\n"
+    "May lower Sp. Def.");
+
+static const u8 sFireFangDescription[] = _(
+    "Bites with flame-cloaked\n"
+    "fangs. May burn/flinch.");
+
+static const u8 sThunderFangDescription[] = _(
+    "Bites with electrified fangs.\n"
+    "May paralyze/flinch.");
+
+static const u8 sIceFangDescription[] = _(
+    "Bites with cold-infused fangs.\n"
+    "May freeze/flinch.");
+
+static const u8 sPowerGemDescription[] = _(
+    "Attacks with sparkling light\n"
+    "like precious gemstones.");
+
+static const u8 sBraveBirdDescription[] = _(
+    "Charges at high speed.\n"
+    "Also hurts the user.");
+
+static const u8 sChargeBeamDescription[] = _(
+    "Fires electric charge.\n"
+    "May sharply raise Sp. Atk.");
+
+static const u8 sNightSlashDescription[] = _(
+    "Slashes in the dark.\n"
+    "High critical-hit ratio.");
+
+static const u8 sPsychoCutDescription[] = _(
+    "Tears with psychic blades.\n"
+    "High critical-hit ratio.");
+
+static const u8 sXScissorDescription[] = _(
+    "Crosses claws like scissors.\n"
+    "Powerful bug attack.");
+
+static const u8 sZenHeadbuttDescription[] = _(
+    "Focuses will and headbutts.\n"
+    "May cause flinching.");
+
+static const u8 sShadowClawDescription[] = _(
+    "Slashes with shadow claw.\n"
+    "High critical-hit ratio.");
+
+static const u8 sSeedBombDescription[] = _(
+    "Barrage of hard seeds from\n"
+    "above. Grass attack.");
+
+static const u8 sNastyPlotDescription[] = _(
+    "Thinks bad thoughts to sharply\n"
+    "raise Special Attack.");
+
+static const u8 sPincerSnapDescription[] = _(
+    "Pincers clamp and attack.\n"
+    "Each turn squeezing tighter.");
+
+static const u8 sBugBuzzDescription[] = _(
+    "Vibrates wings to make\n"
+    "damaging sound wave.");
+
+static const u8 sDischargeDescription[] = _(
+    "Looses electric flare at\n"
+    "all in battle. May paralyze.");
+
+static const u8 sForcePalmDescription[] = _(
+    "Thrusts palm forward.\n"
+    "May paralyze target.");
+
+static const u8 sAuraSphereDescription[] = _(
+    "Blast of aura power from\n"
+    "within. Never misses.");
+
+static const u8 sOminousWindDescription[] = _(
+    "Ghostly wind blast. May\n"
+    "raise all user's stats.");
+
+static const u8 sMirrorShotDescription[] = _(
+    "Flash from polished body.\n"
+    "May lower accuracy.");
+
+static const u8 sDragonPulseDescription[] = _(
+    "Shock wave from gaping mouth.\n"
+    "Powerful dragon attack.");
+
+static const u8 sAquaTailDescription[] = _(
+    "Smashes foe with a tail of\n"
+    "water. High critical-hit ratio.");
+
+static const u8 sCottonGuardDescription[] = _(
+    "Wraps body with cotton.\n"
+    "Sharply raises Defense.");
+
+static const u8 sFlameChargeDescription[] = _(
+    "Charges at the foe cloaked\n"
+    "in flames. Raises SPEED.");
+
+
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 {
@@ -1774,4 +1915,39 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_WATER_PULSE - 1] = sWaterPulseDescription,
     [MOVE_DOOM_DESIRE - 1] = sDoomDesireDescription,
     [MOVE_PSYCHO_BOOST - 1] = sPsychoBoostDescription,
+    [MOVE_IRON_HEAD - 1]     = sIronHeadDescription,
+    [MOVE_FLASH_CANNON - 1]  = sFlashCannonDescription,
+    [MOVE_AVALANCHE - 1]     = sAvalancheDescription,
+    [MOVE_EARTH_POWER - 1]   = sEarthPowerDescription,
+    [MOVE_POISON_JAB - 1]    = sPoisonJabDescription,
+    [MOVE_AQUA_JET - 1]      = sAquaJetDescription,
+    [MOVE_BULLET_PUNCH - 1]  = sBulletPunchDescription,
+    [MOVE_SHADOW_SNEAK - 1]  = sShadowSneakDescription,
+    [MOVE_ICE_SHARD - 1]     = sIceShardDescription,
+    [MOVE_DARK_PULSE - 1]    = sDarkPulseDescription,
+    [MOVE_ENERGY_BALL - 1]   = sEnergyBallDescription,
+    [MOVE_FIRE_FANG - 1]     = sFireFangDescription,
+    [MOVE_THUNDER_FANG - 1]  = sThunderFangDescription,
+    [MOVE_ICE_FANG - 1]      = sIceFangDescription,
+    [MOVE_POWER_GEM - 1]     = sPowerGemDescription,
+    [MOVE_BRAVE_BIRD - 1]    = sBraveBirdDescription,
+    [MOVE_CHARGE_BEAM - 1]   = sChargeBeamDescription,
+    [MOVE_NIGHT_SLASH - 1]   = sNightSlashDescription,
+    [MOVE_PSYCHO_CUT - 1]    = sPsychoCutDescription,
+    [MOVE_X_SCISSOR - 1]     = sXScissorDescription,
+    [MOVE_ZEN_HEADBUTT - 1]  = sZenHeadbuttDescription,
+    [MOVE_SHADOW_CLAW - 1]   = sShadowClawDescription,
+    [MOVE_SEED_BOMB - 1]     = sSeedBombDescription,
+    [MOVE_NASTY_PLOT - 1]    = sNastyPlotDescription,
+    [MOVE_PINCER_SNAP - 1]      = sPincerSnapDescription,
+    [MOVE_BUG_BUZZ - 1]      = sBugBuzzDescription,
+    [MOVE_DISCHARGE - 1]     = sDischargeDescription,
+    [MOVE_FORCE_PALM - 1]    = sForcePalmDescription,
+    [MOVE_AURA_SPHERE - 1]   = sAuraSphereDescription,
+    [MOVE_OMINOUS_WIND - 1]  = sOminousWindDescription,
+    [MOVE_MIRROR_SHOT - 1]   = sMirrorShotDescription,
+    [MOVE_DRAGON_PULSE - 1]  = sDragonPulseDescription,
+    [MOVE_AQUA_TAIL - 1]     = sAquaTailDescription,
+    [MOVE_COTTON_GUARD - 1]    = sCottonGuardDescription,
+    [MOVE_FLAME_CHARGE - 1]    = sFlameChargeDescription,
 };

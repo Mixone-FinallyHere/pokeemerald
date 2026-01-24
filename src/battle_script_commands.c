@@ -1153,7 +1153,7 @@ static void Cmd_accuracycheck(void)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
@@ -1597,6 +1597,16 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     {
         flags |= MOVE_RESULT_MISSED;
     }
+
+    // Solid Rock
+    if (gBattleMons[defender].ability == ABILITY_SOLID_ROCK
+     && ((flags & MOVE_RESULT_SUPER_EFFECTIVE) && !(flags & MOVE_RESULT_NOT_VERY_EFFECTIVE) 
+     && !(flags & MOVE_RESULT_NO_EFFECT))
+     && gBattleMoves[move].power)
+    {
+        gBattleMoveDamage = gBattleMoveDamage * 75 / 100;
+    }
+
     return flags;
 }
 
@@ -1944,7 +1954,7 @@ static void Cmd_datahpupdate(void)
                 // Note: While physicalDmg/specialDmg below are only distinguished between for Counter/Mirror Coat, they are
                 //       used in combination as general damage trackers for other purposes. specialDmg is additionally used
                 //       to help determine if a fire move should defrost the target.
-                if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_HP_UPDATE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_HP_UPDATE) && gCurrentMove != MOVE_PAIN_SPLIT)
                 {
                     // Record physical damage/attacker for Counter
                     gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
@@ -1960,7 +1970,7 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_HP_UPDATE))
+                else if (IS_MOVE_SPECIAL(gCurrentMove)&& !(gHitMarker & HITMARKER_PASSIVE_HP_UPDATE))
                 {
                     // Record special damage/attacker for Mirror Coat
                     gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
@@ -2245,6 +2255,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
     bool32 statusChanged = FALSE;
     u8 affectsUser = 0; // 0x40 otherwise
     bool32 noSunCanFreeze = TRUE;
+    u8 statId;
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_AFFECTS_USER)
     {
@@ -2624,8 +2635,10 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 3) + 3); // 3-6 turns
-
+                    if (gCurrentMove == MOVE_PINCER_SNAP)
+                        gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 1) + 3); // 3-4 turns
+                    else
+                        gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 3) + 3); // 3-6 turns
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 0) = gCurrentMove;
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 1) = gCurrentMove >> 8;
                     *(gBattleStruct->wrappedBy + gEffectBattler) = gBattlerAttacker;
@@ -2657,8 +2670,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_SP_DEF_PLUS_1:
             case MOVE_EFFECT_ACC_PLUS_1:
             case MOVE_EFFECT_EVS_PLUS_1:
+                statId = gBattleCommunication[MOVE_EFFECT_BYTE] - MOVE_EFFECT_ATK_PLUS_1 + 1;
+                if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_SPD_PLUS_1)
+                    statId = STAT_SPEED;
                 if (ChangeStatBuffs(SET_STAT_BUFF_VALUE(1),
-                                    gBattleCommunication[MOVE_EFFECT_BYTE] - MOVE_EFFECT_ATK_PLUS_1 + 1,
+                                    statId,
                                     affectsUser, 0))
                 {
                     gBattlescriptCurrInstr++;
@@ -2906,6 +2922,47 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_SP_ATK_TWO_DOWN: // Overheat
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_SAtkDown2;
+                break;
+            case MOVE_EFFECT_BURN_OR_FLINCH:
+                if (Random() % 10 == 0)  // 10% chance for burn
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_BURN;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply burn
+                }
+                if (Random() % 10 == 0)  // Independent 10% chance for flinch
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply flinch
+                }
+                gBattlescriptCurrInstr++;   
+                break;
+
+            case MOVE_EFFECT_FREEZE_OR_FLINCH:
+                if (Random() % 10 == 0)  // 10% chance for freeze
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FREEZE;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply freeze
+                }
+                if (Random() % 10 == 0)  // Independent 10% chance for flinch
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply flinch
+                }
+                gBattlescriptCurrInstr++;
+                break;
+
+            case MOVE_EFFECT_PARALYZE_OR_FLINCH:
+                if (Random() % 10 == 0)  // 10% chance for paralysis
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_PARALYSIS;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply paralysis
+                }
+                if (Random() % 10 == 0)  // Independent 10% chance for flinch
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply flinch
+                }
+                gBattlescriptCurrInstr++;
                 break;
             }
         }
@@ -6509,6 +6566,7 @@ static void Cmd_various(void)
         BtlController_EmitPlayFanfareOrBGM(B_COMM_TO_CONTROLLER, MUS_VICTORY_TRAINER, TRUE);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
+
     }
 
     gBattlescriptCurrInstr += 3;
@@ -7084,6 +7142,12 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             gBattleTextBuff2[1] = B_BUFF_STRING;
             gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
             gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
+            index = 4;
+        } else if (statValue >= 3)
+        {
+            gBattleTextBuff2[1] = B_BUFF_STRING;
+            gBattleTextBuff2[2] = STRINGID_DRASTICALLY & 0xFF;
+            gBattleTextBuff2[3] = STRINGID_DRASTICALLY >> 8;
             index = 4;
         }
         gBattleTextBuff2[index++] = B_BUFF_STRING;

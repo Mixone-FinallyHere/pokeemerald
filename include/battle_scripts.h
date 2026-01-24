@@ -234,4 +234,7 @@ extern const u8 BattleScript_DownloadSpAtkActivates[];
 //extern const u8 BattleScript_PoisonTouchActivates[];
 //extern const u8 BattleScript_SolidRockReducesDamage[];
 
+// Gen 4 move effects
+extern const u8 BattleScript_MoveEffectPincerSnap[];
+
 #endif // GUARD_BATTLE_SCRIPTS_H

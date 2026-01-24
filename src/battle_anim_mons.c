@@ -851,6 +851,11 @@ u8 GetBattlerSide(u8 battler)
     return GET_BATTLER_SIDE2(battler);
 }
 
+bool8 IsOnPlayerSide(u8 battler)
+{
+    return GetBattlerSide(battler) == B_SIDE_PLAYER;
+}
+
 u8 GetBattlerPosition(u8 battler)
 {
     return gBattlerPositions[battler];
