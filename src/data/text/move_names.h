@@ -390,5 +390,6 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_AQUA_TAIL]     = _("AQUA TAIL"),
     [MOVE_COTTON_GUARD]  = _("COTTON GUARD"),
     [MOVE_FLAME_CHARGE]  = _("FLAME CHARGE"),
+    [MOVE_SOMNIBITE]     = _("SOMNIBITE"),
     
 };

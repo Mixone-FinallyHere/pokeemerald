@@ -406,6 +406,7 @@ gBattleAnims_Moves::
 	.4byte Move_AQUA_TAIL
 	.4byte Move_COTTON_GUARD
 	.4byte Move_FLAME_CHARGE
+	.4byte Move_SOMNIBITE
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -11426,6 +11427,39 @@ Move_ICE_FANG:
 	blendoff
 	delay 1
 	end
+
+Move_SOMNIBITE:
+    loadspritegfx ANIM_TAG_PINK_CLOUD
+    loadspritegfx ANIM_TAG_BUBBLE
+    loadspritegfx ANIM_TAG_SMALL_BUBBLES
+    loadspritegfx ANIM_TAG_SHARP_TEETH
+    loadspritegfx ANIM_TAG_IMPACT
+    monbg ANIM_TARGET
+    setalpha 12, 8
+    createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 9, RGB(20, 15, 25)
+    delay 10
+    playsewithpan SE_M_YAWN, SOUND_PAN_ATTACKER
+    createsprite gYawnCloudSpriteTemplate, ANIM_TARGET, 5, 2
+    delay 6
+    createsprite gYawnCloudSpriteTemplate, ANIM_TARGET, 5, 1
+    delay 6
+    createsprite gYawnCloudSpriteTemplate, ANIM_TARGET, 5, 0
+    waitforvisualfinish
+    playsewithpan SE_M_BITE, SOUND_PAN_TARGET
+    createsprite gSharpTeethSpriteTemplate, ANIM_ATTACKER, 2, 0, -32, 0, 0, 819, 10
+    createsprite gSharpTeethSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, 4, 0, -819, 10
+    delay 10
+    createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
+    createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 4, 7, 1
+    waitforvisualfinish
+    playsewithpan SE_M_SNORE, SOUND_PAN_TARGET
+    call WaterBubblesEffectLong
+    waitforvisualfinish
+    createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 9, 0, RGB(20, 15, 25)
+    waitforvisualfinish
+    clearmonbg ANIM_TARGET
+    blendoff
+    end
 
 Move_POWER_GEM:
     loadspritegfx ANIM_TAG_POWER_GEM

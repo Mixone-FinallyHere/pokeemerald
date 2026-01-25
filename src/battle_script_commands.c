@@ -2732,7 +2732,6 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_ATK_MINUS_2:
             case MOVE_EFFECT_DEF_MINUS_2:
             case MOVE_EFFECT_SPD_MINUS_2:
-            case MOVE_EFFECT_SP_ATK_MINUS_2:
             case MOVE_EFFECT_SP_DEF_MINUS_2:
             case MOVE_EFFECT_ACC_MINUS_2:
             case MOVE_EFFECT_EVS_MINUS_2:
@@ -2956,6 +2955,19 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_PARALYSIS;
                     SetMoveEffect(FALSE, FALSE);  // Recurse to apply paralysis
+                }
+                if (Random() % 10 == 0)  // Independent 10% chance for flinch
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply flinch
+                }
+                gBattlescriptCurrInstr++;
+                break;
+            case MOVE_EFFECT_SLEEP_OR_FLINCH:
+                if (Random() % 10 == 0)  // 10% chance for sleep
+                {
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_SLEEP;
+                    SetMoveEffect(FALSE, FALSE);  // Recurse to apply sleep
                 }
                 if (Random() % 10 == 0)  // Independent 10% chance for flinch
                 {

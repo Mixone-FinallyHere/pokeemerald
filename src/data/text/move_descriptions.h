@@ -1557,6 +1557,9 @@ static const u8 sFlameChargeDescription[] = _(
     "Charges at the foe cloaked\n"
     "in flames. Raises SPEED.");
 
+static const u8 sSomnibiteDescription[] = _(
+    "Bites the foe to make it\n"
+    "sleep. May cause a flinch.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -1950,4 +1953,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_AQUA_TAIL - 1]     = sAquaTailDescription,
     [MOVE_COTTON_GUARD - 1]    = sCottonGuardDescription,
     [MOVE_FLAME_CHARGE - 1]    = sFlameChargeDescription,
+    [MOVE_SOMNIBITE - 1]    = sSomnibiteDescription,
 };

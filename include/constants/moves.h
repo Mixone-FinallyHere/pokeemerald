@@ -382,7 +382,7 @@
 #define MOVE_SHADOW_CLAW        376
 #define MOVE_SEED_BOMB          377
 #define MOVE_NASTY_PLOT         378
-#define MOVE_PINCER_SNAP           379
+#define MOVE_PINCER_SNAP        379
 #define MOVE_BUG_BUZZ           380
 #define MOVE_DISCHARGE          381
 #define MOVE_FORCE_PALM         382
@@ -393,8 +393,9 @@
 #define MOVE_AQUA_TAIL          387
 #define MOVE_COTTON_GUARD       388
 #define MOVE_FLAME_CHARGE       389
+#define MOVE_SOMNIBITE          390
 
-#define MOVES_COUNT 390
+#define MOVES_COUNT 391
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

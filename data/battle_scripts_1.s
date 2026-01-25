@@ -235,7 +235,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSpAttackUpHit 		 @ EFFECT_SPATTACK_UP_HIT
 	.4byte BattleScript_EffectBurnAndFlinch			 @ EFFECT_BURN_OR_FLINCH_HIT
 	.4byte BattleScript_EffectParalizeAndFlinch	     @ EFFECT_PARALYZE_OR_FLINCH_HIT
-	.4byte BattleScript_EffectFreexeAndFlinch		 @ EFFECT_FREEZE_OR_FLINCH_HIT
+	.4byte BattleScript_EffectFreezeAndFlinch		 @ EFFECT_FREEZE_OR_FLINCH_HIT
+	.4byte BattleScript_EffectSleepAndFlinch		 @ EFFECT_SLEEP_OR_FLINCH_HIT
 	.4byte BattleScript_EffectDefenseUp3			 @ EFFECT_DEFENSE_UP_3
 	.4byte BattleScript_EffectSpeedUpHit			 @ EFFECT_SPEED_UP_HIT
 
@@ -4607,8 +4608,12 @@ BattleScript_EffectParalizeAndFlinch::
 	setmoveeffect MOVE_EFFECT_PARALYZE_OR_FLINCH
 	goto BattleScript_EffectHit
 
-BattleScript_EffectFreexeAndFlinch::		
+BattleScript_EffectFreezeAndFlinch::		
 	setmoveeffect MOVE_EFFECT_FREEZE_OR_FLINCH
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSleepAndFlinch::
+	setmoveeffect MOVE_EFFECT_SLEEP_OR_FLINCH
 	goto BattleScript_EffectHit
 
 BattleScript_EffectDefenseUp3::

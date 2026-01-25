@@ -291,26 +291,25 @@ enum BattlerId
 #define MOVE_EFFECT_ATK_MINUS_2         46
 #define MOVE_EFFECT_DEF_MINUS_2         47
 #define MOVE_EFFECT_SPD_MINUS_2         48
-#define MOVE_EFFECT_SP_ATK_MINUS_2      49
-#define MOVE_EFFECT_SP_DEF_MINUS_2      50
-#define MOVE_EFFECT_ACC_MINUS_2         51
-#define MOVE_EFFECT_EVS_MINUS_2         52
-#define MOVE_EFFECT_THRASH              53
-#define MOVE_EFFECT_KNOCK_OFF           54
-#define MOVE_EFFECT_NOTHING_37          55
-#define MOVE_EFFECT_NOTHING_38          56
-#define MOVE_EFFECT_NOTHING_39          57
-#define MOVE_EFFECT_NOTHING_3A          58
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
+#define MOVE_EFFECT_SP_DEF_MINUS_2      49
+#define MOVE_EFFECT_ACC_MINUS_2         50
+#define MOVE_EFFECT_EVS_MINUS_2         51
+#define MOVE_EFFECT_THRASH              52
+#define MOVE_EFFECT_KNOCK_OFF           53
+#define MOVE_EFFECT_NOTHING_37          54
+#define MOVE_EFFECT_NOTHING_38          55
+#define MOVE_EFFECT_NOTHING_39          56
+#define MOVE_EFFECT_NOTHING_3A          57
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     58
 // Gen 4
-#define MOVE_EFFECT_BURN_OR_FLINCH      60
-#define MOVE_EFFECT_FREEZE_OR_FLINCH    61
-#define MOVE_EFFECT_PARALYZE_OR_FLINCH  62
-#define MOVE_EFFECT_SLEEP_OR_FLINCH     63
-#define NUM_MOVE_EFFECTS                64
+#define MOVE_EFFECT_BURN_OR_FLINCH      59
+#define MOVE_EFFECT_FREEZE_OR_FLINCH    60
+#define MOVE_EFFECT_PARALYZE_OR_FLINCH  61
+#define MOVE_EFFECT_SLEEP_OR_FLINCH     62
+#define NUM_MOVE_EFFECTS                63
 
-#define MOVE_EFFECT_AFFECTS_USER        65
-#define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
+#define MOVE_EFFECT_AFFECTS_USER        64
+#define MOVE_EFFECT_CERTAIN             128
 
 // Battle environment defines for gBattleEnvironment.
 #define BATTLE_ENVIRONMENT_GRASS        0
