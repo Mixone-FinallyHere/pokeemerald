@@ -309,5 +309,9 @@ extern const union AnimCmd *const gAnims_FlamethrowerFlame[];
 
 void AnimPetalDanceBigFlower(struct Sprite *sprite);
 
+extern const union AffineAnimCmd *const gAffineAnims_IceCrystalHit[];
+extern const union AnimCmd *const gAnims_IceCrystalLarge[];
+extern const union AnimCmd *const gAnims_IceCrystalSmall[];
+void AnimIceEffectParticle(struct Sprite *sprite);
 
 #endif // GUARD_BATTLE_ANIM_H

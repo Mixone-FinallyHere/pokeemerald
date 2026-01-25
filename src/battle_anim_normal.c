@@ -1113,3 +1113,15 @@ static void AnimFlashingHitSplat_Step(struct Sprite *sprite)
     if (sprite->data[0]++ > 12)
         DestroyAnimSprite(sprite);
 }
+
+const struct SpriteTemplate gShakeMonOrTerrainSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimShakeMonOrBattlePlatforms,
+};
+

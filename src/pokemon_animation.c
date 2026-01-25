@@ -2022,7 +2022,7 @@ static void Anim_GlowYellow(struct Sprite *sprite)
 
 static void Anim_GlowPurple(struct Sprite *sprite)
 {
-    GlowColor(RGB(24, 0, 24), 12, 2);
+    GlowColor(RGB_PURPLE, 12, 2);
 }
 
 static void BackAndLunge_0(struct Sprite *sprite);
@@ -5300,7 +5300,9 @@ enum {
     SHAKEGLOW_RED,
     SHAKEGLOW_GREEN,
     SHAKEGLOW_BLUE,
-    SHAKEGLOW_BLACK
+    SHAKEGLOW_BLACK,
+    SHAKEGLOW_WHITE,
+    SHAKEGLOW_PURPLE
 };
 
 static void ShakeGlow_Blend(struct Sprite *sprite)
@@ -5310,7 +5312,9 @@ static void ShakeGlow_Blend(struct Sprite *sprite)
         [SHAKEGLOW_RED]   = RGB_RED,
         [SHAKEGLOW_GREEN] = RGB_GREEN,
         [SHAKEGLOW_BLUE]  = RGB_BLUE,
-        [SHAKEGLOW_BLACK] = RGB_BLACK
+        [SHAKEGLOW_BLACK] = RGB_BLACK,
+        [SHAKEGLOW_WHITE] = RGB_WHITE,
+        [SHAKEGLOW_PURPLE] = RGB_PURPLE
     };
 
     if (sprite->data[2] > 127)

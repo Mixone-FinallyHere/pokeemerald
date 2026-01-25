@@ -26,6 +26,7 @@ static void DoMementoShadowEffect(struct Task *);
 static void SetAllBattlersSpritePriority(u8);
 static void AnimTask_MetallicShine_Step(u8);
 
+
 // Unused
 static const struct SpriteTemplate sUnusedBagStealSpriteTemplate =
 {
@@ -999,3 +1000,4 @@ void GetIsDoomDesireHitTurn(u8 taskId)
 
     DestroyAnimVisualTask(taskId);
 }
+
