@@ -417,7 +417,19 @@
 #define ITEM_MAGMA_EMBLEM 375
 #define ITEM_OLD_SEA_MAP 376
 
-#define ITEMS_COUNT 377
+// Extra TMs
+#define ITEM_TM51 377
+#define ITEM_TM52 378
+#define ITEM_TM53 379
+#define ITEM_TM54 380
+#define ITEM_TM55 381
+#define ITEM_TM56 382
+#define ITEM_TM57 383
+#define ITEM_TM58 384
+#define ITEM_TM59 385
+#define ITEM_TM60 386
+
+#define ITEMS_COUNT 387
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow
@@ -445,8 +457,10 @@
 #define ITEM_TO_MAIL(itemId) ((itemId) - FIRST_MAIL_INDEX)
 #define MAIL_NONE 0xFF
 
-#define NUM_TECHNICAL_MACHINES 50
-#define NUM_HIDDEN_MACHINES     8
+#define NUM_ORIGINAL_TMS       50
+#define NUM_EXTRA_TMS          10
+#define NUM_TECHNICAL_MACHINES (NUM_ORIGINAL_TMS + NUM_EXTRA_TMS)  // 60
+#define NUM_HIDDEN_MACHINES    8
 
 #define MAX_BAG_ITEM_CAPACITY  99
 #define MAX_PC_ITEM_CAPACITY   999

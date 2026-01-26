@@ -1358,16 +1358,61 @@ static const u8 sTM48Desc[] = _(
     "turn this is used.");
 
 static const u8 sTM49Desc[] = _(
-    "Steals the effects\n"
-    "of the move the foe\n"
-    "is trying to use.");
+    "Smashes foe with a\n"
+    "tail of water. High\n"
+    "critical-hit ratio.");
 
 static const u8 sTM50Desc[] = _(
     "Enables full-power\n"
     "attack, but sharply\n"
     "lowers SP. ATK.");
 
+static const u8 sTM51Desc[] = _(
+    "Ground attack that\n"
+    "may lower Sp. Def.");
 
+static const u8 sTM52Desc[] = _(
+    "Steel beam attack\n"
+    "that may lower\n"
+    "Sp. Def.");
+
+static const u8 sTM53Desc[] = _(
+    "Grass attack with\n"
+    "high power. May\n"
+    "lower Sp. Def.");
+
+static const u8 sTM54Desc[] = _(
+    "Dark pulse that may\n"
+    "cause flinching.");
+
+static const u8 sTM55Desc[] = _(
+    "Raises Sp. Atk by\n"
+    "sharply two stages.");
+
+static const u8 sTM56Desc[] = _(
+    "Ice attack. Power\n"
+    "doubles if user\n"
+    "was hurt.");
+
+static const u8 sTM57Desc[] = _(
+    "Dragon beam attack\n"
+    "with very high\n"
+    "power.");
+
+static const u8 sTM58Desc[] = _(
+    "Ghost claw attack.\n"
+    "High crit ratio.");
+
+static const u8 sTM59Desc[] = _(
+    "Electric attack.\n"
+    "May sharply raise\n"
+    "Sp. Atk.");
+
+static const u8 sTM60Desc[] = _(
+    "Poison jab attack.\n"
+    "May poison the\n"
+    "target.");
+// HMs
 static const u8 sHM01Desc[] = _(
     "Attacks the foe\n"
     "with sharp blades\n"

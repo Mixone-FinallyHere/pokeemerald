@@ -132,6 +132,25 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_BIRCH_LAB_STATE, 3
+	giveitem ITEM_TM42, 1
+	giveitem ITEM_TM43, 1
+	giveitem ITEM_TM44, 1
+	giveitem ITEM_TM45, 1
+	giveitem ITEM_TM46, 1
+	giveitem ITEM_TM47, 1
+	giveitem ITEM_TM48, 1
+	giveitem ITEM_TM49, 1
+	giveitem ITEM_TM50, 1
+	giveitem ITEM_TM51, 1
+	giveitem ITEM_TM52, 1
+	giveitem ITEM_TM53, 1
+	giveitem ITEM_TM54, 1
+	giveitem ITEM_TM55, 1
+	giveitem ITEM_TM56, 1
+	giveitem ITEM_TM57, 1
+	giveitem ITEM_TM58, 1
+	giveitem ITEM_TM59, 1
+	giveitem ITEM_TM60, 1
 	releaseall
 	end
 

@@ -50,7 +50,7 @@
     F(THIEF) \
     F(STEEL_WING) \
     F(SKILL_SWAP) \
-    F(SNATCH) \
+    F(AQUA_TAIL) \
     F(OVERHEAT)
 
 #define FOREACH_HM(F) \
@@ -63,6 +63,18 @@
     F(WATERFALL) \
     F(DIVE)
 
+#define FOREACH_EXTRA_TM(F) \
+    F(EARTH_POWER) \
+    F(FLASH_CANNON) \
+    F(ENERGY_BALL) \
+    F(DARK_PULSE) \
+    F(NASTY_PLOT) \
+    F(AVALANCHE) \
+    F(DRAGON_PULSE) \
+    F(SHADOW_CLAW) \
+    F(CHARGE_BEAM) \
+    F(POISON_JAB)
+    
 #define FOREACH_TMHM(F) \
     FOREACH_TM(F) \
     FOREACH_HM(F)
