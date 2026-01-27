@@ -342,6 +342,7 @@ SECTIONS {
         src/international_string_util.o(.text);
         src/ui_main_menu.o(.text);
         src/tm_case.o(.text);
+        src/map_preview_screen.o(.text);
     } > ROM =0
 
     script_data :
@@ -704,6 +705,7 @@ SECTIONS {
         data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
+        src/map_preview_screen.o(.rodata);
     } > ROM =0
 
     song_data :
