@@ -6332,7 +6332,7 @@ Move_CRABHAMMER:
 	end
 
 Move_SURF:
-	createvisualtask AnimTask_CreateSurfWave, 2, FALSE
+	create_surf_wave palette=ANIM_SURF_PAL_SURF
 	delay 24
 	panse SE_M_SURF, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	waitforvisualfinish
@@ -8630,7 +8630,7 @@ ArmThrustLeft:
 
 Move_MUDDY_WATER:
 	panse SE_M_WHIRLPOOL, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	createvisualtask AnimTask_CreateSurfWave, 2, TRUE
+	create_surf_wave palette=ANIM_SURF_PAL_MUDDY_WATER
 	waitforvisualfinish
 	end
 
